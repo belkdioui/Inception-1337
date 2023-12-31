@@ -1,12 +1,14 @@
 FROM debian:buster
 
-RUN	apt-get update && \
-	apt-get install -y php-fpm php-mysql curl && \
-	rm -rf /var/lib/apt/lists/* 
+RUN apt-get update && apt-get -y install php7.3 php-mysqli php-fpm
 
-COPY ./tools/script.sh /
-COPY ./conf/wp-config.php /
+EXPOSE 9000
 
-RUN chmod +x /script.sh
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY ./tools /var/www/
 
-CMD ["/script.sh"]
+RUN chmod +x /var/www/wordpress_start.sh
+
+ENTRYPOINT [ "/var/www/wordpress_start.sh" ]
+
+CMD ["/usr/sbin/php-fpm7.3", "--nodaemonize"]
