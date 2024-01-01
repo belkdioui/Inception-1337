@@ -1,7 +1,7 @@
 
 all:
-	@mkdir -p $(HOME)/data/wordpress
-	@mkdir -p $(HOME)/data/mariadb
+	@mkdir -p /home/inception/data/wordpress
+	@mkdir -p /home/inception/data/mariadb
 	@docker-compose -f ./srcs/docker-compose.yml up
 
 down:
@@ -16,7 +16,6 @@ clean:
 	docker rmi -f $$(docker images -qa);\
 	docker volume rm $$(docker volume ls -q);\
 	docker network rm $$(docker network ls -q);\
-	rm -rf $(HOME)/data/wordpress
-	rm -rf $(HOME)/data/mariadb
+	sudo rm -rf /home/inception/data
 
 .PHONY: all re down clean
