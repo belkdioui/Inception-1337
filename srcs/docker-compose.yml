@@ -12,14 +12,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /$HOME/data/wordpress
+      device: /home/inception/data/wordpress
   db:
     driver: local
     name: db
     driver_opts:
       type: none
       o: bind
-      device: /$HOME/data/mariadb
+      device: /home/inception/data/mariadb
 
 services:
   mariadb:
